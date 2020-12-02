@@ -1,0 +1,13 @@
+body {
+  color: red;
+  background-color: #afafaf;
+}
+
+.heading {
+  text-align: center;
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+}
