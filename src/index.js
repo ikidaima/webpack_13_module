@@ -1,7 +1,11 @@
 import './index.html';
 import './style.css';
-import buttonElem from './button/button'
+import Button from './button/button'
 
 const rootElem = document.querySelector('.js-root');
 
-rootElem.append(buttonElem);
+const button = new Button;
+const button2 = new Button;
+
+button.render(rootElem);
+button2.render(rootElem);
