@@ -3,36 +3,37 @@ import './button.css';
 const START_VALUE = 0;
 
 export default class Button {
-  constructor() {
-    this.buttonElem = creatButtonElem();
+
+  render(selectorOfParentElem) {
+    const parentElem = document.querySelector(selectorOfParentElem);
+
+    if ( !this.buttonElem ) {
+      this._creatButtonElem();
+    }
+
+    parentElem.append(this.buttonElem);
   }
 
-  render(parent) {
-    parent.append(this.buttonElem);
+  _creatButtonElem() {
+    this.buttonElem = document.createElement('input');
+
+    this.buttonElem.value = START_VALUE;
+    this.buttonElem.type = 'button';
+    this.buttonElem.classList.add('button');
+
+    this.buttonElem.addEventListener('click', this._onButtonClick);
   }
-}
 
-function creatButtonElem() {
-  const buttonElem = document.createElement('input');
+  _onButtonClick(event) {
+    event.target.value++;
 
-  buttonElem.value = START_VALUE;
-  buttonElem.type = 'button';
-  buttonElem.classList.add('button');
-
-  buttonElem.addEventListener('click', onButtonClick);
-
-  return buttonElem;
-}
-
-function onButtonClick(event) {
-  event.target.value++;
-
-  if (event.target.value == 10) {
-
-    import('./dynamicButton.js')
-      .then(obj => {
-        obj.addClass(event.target, 'button--red')
-      });
+    if (event.target.value == 10) {
+      import('./dynamicButton.js')
+        .then(obj => {
+          obj.addClass(event.target, 'button--red');
+        })
+    }
 
   }
+
 }
