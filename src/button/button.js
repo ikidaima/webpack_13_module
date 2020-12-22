@@ -1,8 +1,17 @@
 import './button.css';
+import createElement from '../creatElement';
 
 const START_VALUE = 0;
+const CLASS_MODIFIER = 'button--red';
+const ATTRIBUTE_OF_BUTTON = {
+  class: 'button',
+  type: 'button'
+};
 
 export default class Button {
+  constructor() {
+    this.buttonValue = START_VALUE;
+  }
 
   render(selectorOfParentElem) {
     const parentElem = document.querySelector(selectorOfParentElem);
@@ -15,22 +24,18 @@ export default class Button {
   }
 
   _creatButtonElem() {
-    this.buttonElem = document.createElement('input');
+    this.buttonElem = createElement('button', this.buttonValue, ATTRIBUTE_OF_BUTTON);
 
-    this.buttonElem.value = START_VALUE;
-    this.buttonElem.type = 'button';
-    this.buttonElem.classList.add('button');
-
-    this.buttonElem.addEventListener('click', this._onButtonClick);
+    this.buttonElem.addEventListener('click', this._onButtonClick.bind(this));
   }
 
   _onButtonClick(event) {
-    event.target.value++;
+    event.target.textContent = ++this.buttonValue;
 
-    if (event.target.value == 10) {
+    if (this.buttonValue == 10) {
       import('./dynamicButton.js')
-        .then(obj => {
-          obj.addClass(event.target, 'button--red');
+        .then(moduleDynamicButton => {
+          moduleDynamicButton.addClass(event.target, CLASS_MODIFIER);
         })
     }
 

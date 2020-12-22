@@ -2,8 +2,10 @@ import './index.html';
 import './style.css';
 import Button from './button/button'
 
-const button = new Button;
-const button2 = new Button;
+const SELECTOR_OF_ROOT_ELEM = '.js-root';
 
-button.render('.js-root');
-button2.render('.js-root');
+const button = new Button();
+const button2 = new Button();
+
+button.render(SELECTOR_OF_ROOT_ELEM);
+button2.render(SELECTOR_OF_ROOT_ELEM);
